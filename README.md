@@ -11,7 +11,7 @@ information about text encoding.
 
 # R’s text representation
 
-# R Connections
+# R Connections and encodings
 
 # Printing text to the console
 
@@ -32,6 +32,38 @@ information about text encoding.
 # Graphics
 
 # Issues on Windows
+
+# How-to
+
+## How to work with UTF-8 text data?
+
+## How to read UTF-8 files?
+
+## How to write UTF-8 files?
+
+## How to convert text between encodings?
+
+## How to guess the encoding of text?
+
+## How to check if a string if UTF-8?
+
+## How to download web pages in the right encoding?
+
+## How to `parse()` UTF-8 text into UTF-8 code?
+
+## How to `deparse()` UTF-8 code into UTF-8 text?
+
+## How to include UTF-8 characters in a package `DESCRIPTION`
+
+## How to get a package `DESCRIPTION` in UTF-8?
+
+## How to use UTF-8 file names on Windows?
+
+## How to capture UTF-8 output?
+
+## How to test non-ASCII output?
+
+## How to include non-ASCII characters in the manual?
 
 # Encoding related R functions and packages
 
@@ -54,6 +86,10 @@ information about text encoding.
 -   [cli package](https://cran.rstudio.com/web/packages/cli/)
 
 -   [Unicode package](https://cran.rstudio.com/web/packages/Unicode)
+
+# Changes in R 4.1.0
+
+# Changes in R 4.2.0
 
 # Further Reading
 
