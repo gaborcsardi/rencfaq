@@ -461,6 +461,10 @@ TODO
 
 -   [Unicode package](https://cran.rstudio.com/web/packages/Unicode)
 
+# Known encoding issues in packages and functions
+
+-   `yaml::write_yaml` crashes on Windows on latin1 encoded strings: <https://github.com/viking/r-yaml/issues/90>
+
 # Tips for debugging encoding issues
 
 -   `charToRaw()` is your best friend.

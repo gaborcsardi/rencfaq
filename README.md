@@ -51,6 +51,8 @@ The R Encoding FAQ
         vignettes?](#how-to-include-non-ascii-characters-in-pdf-vignettes)
 -   [Encoding related R functions and
     packages](#encoding-related-r-functions-and-packages)
+-   [Known encoding issues in packages and
+    functions](#known-encoding-issues-in-packages-and-functions)
 -   [Tips for debugging encoding
     issues](#tips-for-debugging-encoding-issues)
 -   [Text transformers](#text-transformers)
@@ -665,6 +667,11 @@ TODO
 -   [cli package](https://cran.rstudio.com/web/packages/cli/)
 
 -   [Unicode package](https://cran.rstudio.com/web/packages/Unicode)
+
+# Known encoding issues in packages and functions
+
+-   `yaml::write_yaml` crashes on Windows on latin1 encoded strings:
+    <https://github.com/viking/r-yaml/issues/90>
 
 # Tips for debugging encoding issues
 
