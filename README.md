@@ -126,56 +126,33 @@ s1 <- "\xfc"
 Encoding(s1) <- "latin1"
 s2 <- iconv(s1, "latin1", "UTF-8")
 s1
-```
-
-    ## [1] "ü"
-
-``` r
+#> [1] "ü"
 s2
+#> [1] "ü"
 ```
-
-    ## [1] "ü"
 
 ``` r
 s1 == s2
-```
-
-    ## [1] TRUE
-
-``` r
+#> [1] TRUE
 identical(s1, s2)
-```
-
-    ## [1] TRUE
-
-``` r
+#> [1] TRUE
 testthat::expect_equal(s1, s2)
 testthat::expect_identical(s1, s2)
 ```
 
 ``` r
 Encoding(s1)
-```
-
-    ## [1] "latin1"
-
-``` r
+#> [1] "latin1"
 Encoding(s2)
+#> [1] "UTF-8"
 ```
-
-    ## [1] "UTF-8"
 
 ``` r
 charToRaw(s1)
-```
-
-    ## [1] fc
-
-``` r
+#> [1] fc
 charToRaw(s2)
+#> [1] c3 bc
 ```
-
-    ## [1] c3 bc
 
 ## Display width
 
@@ -210,8 +187,26 @@ I suggest that you keep your source files in ASCII, except for comments,
 which you can write in UTF-8 if you like. (But not necessarily in
 roxygen2 comments, which will go in the manual, see below!)
 
-If you need to include non-ASCII characters in strings, then use UTF-8
-and `\uxxxx` or `\U{xxxxxx}` escape sequences.
+If you need a string containing non-ASCII characters, construct it with
+`\uxxxx` or `\U{xxxxxx}` escape sequences, which yields a UTF-8-encoded
+string.
+
+``` r
+one_and_a_half <- "\u0031\u00BD"
+one_and_a_half
+#> [1] "1½"
+Encoding(one_and_a_half)
+#> [1] "UTF-8"
+charToRaw(one_and_a_half)
+#> [1] 31 c2 bd
+```
+
+Here are some handy ways to find the Unicode code points for an existing
+string:
+
+-   Copy and paste into the [Unicode character
+    inspector](https://apps.timwhitlock.info/unicode/inspect).
+-   *Do we have other suggestions?*
 
 If you need to include non-UTF-8 non-ASCII characters, e.g. for testing,
 then include them via raw data, or via `\xxx` escape sequences. E.g. to
@@ -225,15 +220,10 @@ t2 <- rawToChar(as.raw(c(
   0xf3, 0x67, 0xe9, 0x70)))
 Encoding(t2) <- "latin1"
 t1 == t2
-```
-
-    ## [1] TRUE
-
-``` r
+#> [1] TRUE
 identical(charToRaw(t1), charToRaw(t2))
+#> [1] TRUE
 ```
-
-    ## [1] TRUE
 
 ## Symbols
 
