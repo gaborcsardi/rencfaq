@@ -556,15 +556,18 @@ UTF-8 strings, from an UTF-8 character vector. It goes like this:
 safe_parse <- function(text) {
   text <- enc2utf8(text)
   Encoding(text) <- "unknown"
-  con <- textConnection(text, encoding = "")
+  con <- textConnection(text)
   on.exit(close(con), add = TRUE)
   eval(parse(con, encoding = "UTF-8"))
 }
 ```
 
--   By marking the text as `unkown` we make sure that `textConnection()`
-    will not convert it.
+-   By marking the text as `unknown` we make sure that
+    `textConnection()` will not convert it.
 -   The `encoding` argument of `parse()` marks the output as `UTF-8`.
+-   Note that when `parse()` parses from a connection it will lose the
+    source references. You can use the `srcfile` argument of `parse()`
+    to add them back.
 
 ## How to `deparse()` UTF-8 code into UTF-8 text?
 
