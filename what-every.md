@@ -151,6 +151,9 @@ world’s writing systems.
         ## 
         ## $`Latin-1`
         ## [1] FALSE
+        ## 
+        ## $codeset
+        ## [1] "UTF-8"
 
 -   It is possible to *declare* the encoding of a string (not character
     vector). (!)
@@ -203,7 +206,7 @@ world’s writing systems.
     -   `unknown`
 
 -   If the native encoding is not UTF-8 or latin1, native strings are
-    marked as `unknown`. But `unkown` means different things on
+    marked as `unknown`. But `unknown` means different things on
     different platforms.
 
 ## What encoding should I use?
@@ -339,7 +342,7 @@ Aligning text with *wide* Unicode characters is hard.
 
 -   `charToRaw()` is your best friend.
 
--   Don’t forget, if they print the same, if they are `identical()` ,
+-   Don’t forget, if they print the same, if they are `identical()`,
     they can still be in a different encoding. `charToRaw()` is your
     best friend.
 

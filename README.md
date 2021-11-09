@@ -163,7 +163,7 @@ Unicode versions.
 
 Up to version 4.0.3 R followed Unicode 8 (released in 2015) in terms of
 character width, so `nchar(..., type = "width")` miscalculated the width
-of many Asian characters .
+of many Asian characters.
 
 R 4.0.4 follows Unicode 12.1.
 
@@ -283,8 +283,8 @@ R uses the native encoding extensively. Some examples:
 -   Output connections assume that the output is in this encoding.
 -   Input connection convert the input into this encoding.
 -   `enc2native()` encodes its input into this encoding.
--   Printing to the screen (via `cat()`, `print()`, `writeLines()`, etc.
-    re-encodes strings into this encoding.
+-   Printing to the screen (via `cat()`, `print()`, `writeLines()`,
+    etc.) re-encodes strings into this encoding.
 
 It is surprisingly tricky to query the current native encoding,
 especially on older R versions. Here are a number of things to try:
@@ -353,9 +353,10 @@ especially on older R versions. Here are a number of things to try:
     [1] "A\n3\n262148\n197888\n5\nUTF-8\n254\n"
     ```
 
-    Line number 6 in the output is the name of the encoding. On R 4.0.x
-    you can also save and RDS file and then use the `infoRDS()` function
-    on it to see the current native encoding.
+    Line number 6 (i.e. after the fifth `\n`) in the output is the name
+    of the encoding. On R 4.0.x you can also save an RDS file and then
+    use the `infoRDS()` function on it to see the current native
+    encoding.
 
 5.  Otherwise can call `Sys.getlocale()` and parsing its output will
     probably give you an encoding name that works in `iconv()`:
@@ -434,7 +435,7 @@ Explanation and notes:
     `encoding = "native.enc"`). Otherwise `read_utf8()` might (silently)
     return lines in the wrong encoding.
 -   If `readLines()` gets a file name, then it opens a connection to it
-    in `UTF-8` , so the file is not re-encoded and it also marks the
+    in `UTF-8`, so the file is not re-encoded and it also marks the
     result as `UTF-8`.
 -   For extra safety, you can add a check that `path` is a file name.
 -   As far as I can tell, there is no R API to query the encoding of a
@@ -530,9 +531,9 @@ settings), if at least one these conditions hold:
 -   all text is either UTF-8 and latin1 encoded, and they are also
     marked as such, or
 -   both computers (or settings) have the same native encoding,
--   the RDS file has version 3, and the the loading platform can
-    represent all characters in the RDS file. This usually holds if the
-    loading platform is UTF-8.
+-   the RDS file has version 3, and the loading platform can represent
+    all characters in the RDS file. This usually holds if the loading
+    platform is UTF-8.
 
 Note that from RDS version 3 the strings in the native encoding are
 re-encoded to the current native encoding when the RDS file is loaded.
@@ -670,7 +671,7 @@ TODO
 
 -   `charToRaw()` is your best friend.
 
--   Don’t forget, if they print the same, if they are `identical()` ,
+-   Don’t forget, if they print the same, if they are `identical()`,
     they can still be in a different encoding. `charToRaw()` is your
     best friend.
 
