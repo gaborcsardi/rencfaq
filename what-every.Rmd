@@ -139,7 +139,7 @@ Unicode is an information technology standard for the consistent encoding, repre
 
     -   `unknown`
 
--   If the native encoding is not UTF-8 or latin1, native strings are marked as `unknown`. But `unkown` means different things on different platforms.
+-   If the native encoding is not UTF-8 or latin1, native strings are marked as `unknown`. But `unknown` means different things on different platforms.
 
 ## What encoding should I use?
 
@@ -238,7 +238,7 @@ Aligning text with *wide* Unicode characters is hard.
 
 -   `charToRaw()` is your best friend.
 
--   Don't forget, if they print the same, if they are `identical()` , they can still be in a different encoding. `charToRaw()` is your best friend.
+-   Don't forget, if they print the same, if they are `identical()`, they can still be in a different encoding. `charToRaw()` is your best friend.
 
 -   `testthat::CheckReporter` saves a `testthat-problems.rds` file, if there were any test failures. You can get this file from win-builder, R-hub, etc. The file is a version 2 RDS file, so no encoding conversion will be done by `readRDS()`.
 
