@@ -449,10 +449,7 @@ Call `brio::write_file()` to write a character vector to a file. Notes:
 1.  `brio::write_file()` converts the input character vector to UTF-8.
     It uses the marked encoding for this, so if that is not correct,
     then the conversion won’t be correct, either.
-2.  Will handle UTF-8 file names correctly on R 3.5 and above. On R 3.4
-    and below, the current CRAN version of brio does not handle UTF-8
-    file names correctly on Windows. This will be hopefully fixed in the
-    next version of brio, with <https://github.com/r-lib/brio/pull/15>
+2.  Will handle UTF-8 file names correctly.
 3.  `brio::write_file()` cannot write to connections currently, because
     with already opened connections there is no way to tell their
     encoding.
