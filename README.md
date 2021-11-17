@@ -407,9 +407,6 @@ file into a string.)
 brio does not currently check if the file is valid in UTF-8. See below
 how to do that.
 
-Note that the CRAN version of brio has a bug with non-ASCII path names
-on Windows, on older R versions: <https://github.com/r-lib/brio/pull/15>
-
 ### With base R only
 
 The xfun package has a nice function that reads UTF-8 files with base R
