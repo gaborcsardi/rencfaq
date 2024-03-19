@@ -1,64 +1,64 @@
 The R Encoding FAQ
 ================
 
--   [Introduction](#introduction)
--   [Contributing](#contributing)
--   [Encoding of text](#encoding-of-text)
--   [R’s text representation](#rs-text-representation)
--   [R Connections and encodings](#r-connections-and-encodings)
--   [Printing text to the console](#printing-text-to-the-console)
-    -   [Display width](#display-width)
--   [Issues when building packages](#issues-when-building-packages)
-    -   [Code files](#code-files)
-    -   [Symbols](#symbols)
--   [Unit tests](#unit-tests)
-    -   [Manual pages](#manual-pages)
-    -   [Vignettes](#vignettes)
--   [Graphics](#graphics)
--   [How-to](#how-to)
-    -   [How to query the current native
-        encoding?](#how-to-query-the-current-native-encoding)
-    -   [How is the `encoding` argument and option
-        used?](#how-is-the-encoding-argument-and-option-used)
-    -   [How to read lines from UTF-8
-        files?](#how-to-read-lines-from-utf-8-files)
-    -   [How to write lines to UTF-8
-        files?](#how-to-write-lines-to-utf-8-files)
-    -   [How to convert text between
-        encodings?](#how-to-convert-text-between-encodings)
-    -   [How to guess the encoding of
-        text?](#how-to-guess-the-encoding-of-text)
-    -   [How to check if a string is
-        UTF-8?](#how-to-check-if-a-string-is-utf-8)
-    -   [How to download web pages in the right
-        encoding?](#how-to-download-web-pages-in-the-right-encoding)
-    -   [Are RDS files encoding-safe?](#are-rds-files-encoding-safe)
-    -   [How to `parse()` UTF-8 text into UTF-8
-        code?](#how-to-parse-utf-8-text-into-utf-8-code)
-    -   [How to `deparse()` UTF-8 code into UTF-8
-        text?](#how-to-deparse-utf-8-code-into-utf-8-text)
-    -   [How to include UTF-8 characters in a package
-        `DESCRIPTION`](#how-to-include-utf-8-characters-in-a-package-description)
-    -   [How to get a package `DESCRIPTION` in
-        UTF-8?](#how-to-get-a-package-description-in-utf-8)
-    -   [How to use UTF-8 file names on
-        Windows?](#how-to-use-utf-8-file-names-on-windows)
-    -   [How to capture UTF-8 output?](#how-to-capture-utf-8-output)
-    -   [How to test non-ASCII output?](#how-to-test-non-ascii-output)
-    -   [How to avoid non-ASCII characters in the
-        manual?](#how-to-avoid-non-ascii-characters-in-the-manual)
-    -   [How to include non-ASCII characters in PDF
-        vignettes?](#how-to-include-non-ascii-characters-in-pdf-vignettes)
--   [Encoding related R functions and
-    packages](#encoding-related-r-functions-and-packages)
--   [Known encoding issues in packages and
-    functions](#known-encoding-issues-in-packages-and-functions)
--   [Tips for debugging encoding
-    issues](#tips-for-debugging-encoding-issues)
--   [Text transformers](#text-transformers)
--   [Changes in R 4.1.0](#changes-in-r-410)
--   [Changes in R 4.2.0](#changes-in-r-420)
--   [Further Reading](#further-reading)
+- [Introduction](#introduction)
+- [Contributing](#contributing)
+- [Encoding of text](#encoding-of-text)
+- [R’s text representation](#rs-text-representation)
+- [R Connections and encodings](#r-connections-and-encodings)
+- [Printing text to the console](#printing-text-to-the-console)
+  - [Display width](#display-width)
+- [Issues when building packages](#issues-when-building-packages)
+  - [Code files](#code-files)
+  - [Symbols](#symbols)
+- [Unit tests](#unit-tests)
+  - [Manual pages](#manual-pages)
+  - [Vignettes](#vignettes)
+- [Graphics](#graphics)
+- [How-to](#how-to)
+  - [How to query the current native
+    encoding?](#how-to-query-the-current-native-encoding)
+  - [How is the `encoding` argument and option
+    used?](#how-is-the-encoding-argument-and-option-used)
+  - [How to read lines from UTF-8
+    files?](#how-to-read-lines-from-utf-8-files)
+  - [How to write lines to UTF-8
+    files?](#how-to-write-lines-to-utf-8-files)
+  - [How to convert text between
+    encodings?](#how-to-convert-text-between-encodings)
+  - [How to guess the encoding of
+    text?](#how-to-guess-the-encoding-of-text)
+  - [How to check if a string is
+    UTF-8?](#how-to-check-if-a-string-is-utf-8)
+  - [How to download web pages in the right
+    encoding?](#how-to-download-web-pages-in-the-right-encoding)
+  - [Are RDS files encoding-safe?](#are-rds-files-encoding-safe)
+  - [How to `parse()` UTF-8 text into UTF-8
+    code?](#how-to-parse-utf-8-text-into-utf-8-code)
+  - [How to `deparse()` UTF-8 code into UTF-8
+    text?](#how-to-deparse-utf-8-code-into-utf-8-text)
+  - [How to include UTF-8 characters in a package
+    `DESCRIPTION`](#how-to-include-utf-8-characters-in-a-package-description)
+  - [How to get a package `DESCRIPTION` in
+    UTF-8?](#how-to-get-a-package-description-in-utf-8)
+  - [How to use UTF-8 file names on
+    Windows?](#how-to-use-utf-8-file-names-on-windows)
+  - [How to capture UTF-8 output?](#how-to-capture-utf-8-output)
+  - [How to test non-ASCII output?](#how-to-test-non-ascii-output)
+  - [How to avoid non-ASCII characters in the
+    manual?](#how-to-avoid-non-ascii-characters-in-the-manual)
+  - [How to include non-ASCII characters in PDF
+    vignettes?](#how-to-include-non-ascii-characters-in-pdf-vignettes)
+- [Encoding related R functions and
+  packages](#encoding-related-r-functions-and-packages)
+- [Known encoding issues in packages and
+  functions](#known-encoding-issues-in-packages-and-functions)
+- [Tips for debugging encoding
+  issues](#tips-for-debugging-encoding-issues)
+- [Text transformers](#text-transformers)
+- [Changes in R 4.1.0](#changes-in-r-410)
+- [Changes in R 4.2.0](#changes-in-r-420)
+- [Further Reading](#further-reading)
 
 # Introduction
 
@@ -71,15 +71,15 @@ information about text encoding.
 Encoding of text is a large topic, and to make this FAQ useful, we need
 your contributions. There are a variety of ways to contribute:
 
--   Found a typo a broken link or some example code is not working for
-    you? Please open an issue about it. Or even better, consider fixing
-    it in a pull request.
--   Something is missing? There is a new (or old) package of function
-    that should be mentioned here? Please open an issue about it.
--   Some information is wrong or something is not explained well? Please
-    open an issue about it. Or even better, fix it in a pull request!
--   You found an answer useful? Please tweet about it and link to this
-    FAQ.
+- Found a typo a broken link or some example code is not working for
+  you? Please open an issue about it. Or even better, consider fixing it
+  in a pull request.
+- Something is missing? There is a new (or old) package of function that
+  should be mentioned here? Please open an issue about it.
+- Some information is wrong or something is not explained well? Please
+  open an issue about it. Or even better, fix it in a pull request!
+- You found an answer useful? Please tweet about it and link to this
+  FAQ.
 
 Your contributions are most appreciated.
 
@@ -87,13 +87,13 @@ Your contributions are most appreciated.
 
 Good general introductions to text encodings:
 
--   [The Absolute Minimum Every Software Developer Absolutely,
-    Positively Must Know About Unicode and Character Sets (No
-    Excuses!)](https://www.joelonsoftware.com/2003/10/08/the-absolute-minimum-every-software-developer-absolutely-positively-must-know-about-unicode-and-character-sets-no-excuses/)
+- [The Absolute Minimum Every Software Developer Absolutely, Positively
+  Must Know About Unicode and Character Sets (No
+  Excuses!)](https://www.joelonsoftware.com/2003/10/08/the-absolute-minimum-every-software-developer-absolutely-positively-must-know-about-unicode-and-character-sets-no-excuses/)
 
--   [What Every Programmer Absolutely, Positively Needs To Know About
-    Encodings And Character Sets To Work With
-    Text](https://kunststube.net/encoding/)
+- [What Every Programmer Absolutely, Positively Needs To Know About
+  Encodings And Character Sets To Work With
+  Text](https://kunststube.net/encoding/)
 
 # R’s text representation
 
@@ -105,14 +105,14 @@ See the R Internals manual:
 
 Some notes about connections.
 
--   Connections assume that the input is in the encoding specified by
-    `getOption("encoding")`. They convert text to the native encoding.
--   Functions that *create* connections have an `encoding` argument,
-    that overrides `getOption("encoding")`.
--   If you tell a connection that the input is already in the native
-    encoding, then it will not convert the input. If the input is in
-    fact *not* in the native encoding, then it is up to the user to mark
-    it accordingly, e.g. as UTF-8.
+- Connections assume that the input is in the encoding specified by
+  `getOption("encoding")`. They convert text to the native encoding.
+- Functions that *create* connections have an `encoding` argument, that
+  overrides `getOption("encoding")`.
+- If you tell a connection that the input is already in the native
+  encoding, then it will not convert the input. If the input is in fact
+  *not* in the native encoding, then it is up to the user to mark it
+  accordingly, e.g. as UTF-8.
 
 # Printing text to the console
 
@@ -167,7 +167,10 @@ of many Asian characters.
 
 R 4.0.4 follows Unicode 12.1.
 
-R 4.1.0 follows Unicode 13.0.
+R 4.1.0 - R 4.3.3 follow Unicode 13.0.
+
+Current R-devel (will be R 4.4.0 in about a month) still uses Unicode
+13.0.
 
 To correctly calculate the display width of Unicode text, across various
 R versions, you can use the utf8 package, or `cli::ansi_nchar()`.
@@ -204,9 +207,9 @@ charToRaw(one_and_a_half)
 Here are some handy ways to find the Unicode code points for an existing
 string:
 
--   Copy and paste into the [Unicode character
-    inspector](https://apps.timwhitlock.info/unicode/inspect).
--   *Do we have other suggestions?*
+- Copy and paste into the [Unicode character
+  inspector](https://apps.timwhitlock.info/unicode/inspect).
+- *Do we have other suggestions?*
 
 If you need to include non-UTF-8 non-ASCII characters, e.g. for testing,
 then include them via raw data, or via `\xxx` escape sequences. E.g. to
@@ -276,15 +279,15 @@ TODO
 
 R uses the native encoding extensively. Some examples:
 
--   Symbols (i.e. variable names, names in a named list, column and row
-    names, etc.) are always in the native encoding.
--   Strings marked with `"unknown"` encoding are assumed to be in this
-    encoding.
--   Output connections assume that the output is in this encoding.
--   Input connection convert the input into this encoding.
--   `enc2native()` encodes its input into this encoding.
--   Printing to the screen (via `cat()`, `print()`, `writeLines()`,
-    etc.) re-encodes strings into this encoding.
+- Symbols (i.e. variable names, names in a named list, column and row
+  names, etc.) are always in the native encoding.
+- Strings marked with `"unknown"` encoding are assumed to be in this
+  encoding.
+- Output connections assume that the output is in this encoding.
+- Input connection convert the input into this encoding.
+- `enc2native()` encodes its input into this encoding.
+- Printing to the screen (via `cat()`, `print()`, `writeLines()`, etc.)
+  re-encodes strings into this encoding.
 
 It is surprisingly tricky to query the current native encoding,
 especially on older R versions. Here are a number of things to try:
@@ -370,8 +373,8 @@ especially on older R versions. Here are a number of things to try:
 
 In general functions use the `encoding` argument two ways:
 
--   For some functions it specifies the encoding of the input.
--   For others it specifies how output should be marked.
+- For some functions it specifies the encoding of the input.
+- For others it specifies how output should be marked.
 
 For example
 
@@ -427,16 +430,16 @@ UTF-8.)
 
 Explanation and notes:
 
--   `path` must be a file name, or an un-opened connection, or a
-    connection that was opened in the native encoding (i.e. with
-    `encoding = "native.enc"`). Otherwise `read_utf8()` might (silently)
-    return lines in the wrong encoding.
--   If `readLines()` gets a file name, then it opens a connection to it
-    in `UTF-8`, so the file is not re-encoded and it also marks the
-    result as `UTF-8`.
--   For extra safety, you can add a check that `path` is a file name.
--   As far as I can tell, there is no R API to query the encoding of a
-    connection.
+- `path` must be a file name, or an un-opened connection, or a
+  connection that was opened in the native encoding (i.e. with
+  `encoding = "native.enc"`). Otherwise `read_utf8()` might (silently)
+  return lines in the wrong encoding.
+- If `readLines()` gets a file name, then it opens a connection to it in
+  `UTF-8`, so the file is not re-encoded and it also marks the result as
+  `UTF-8`.
+- For extra safety, you can add a check that `path` is a file name.
+- As far as I can tell, there is no R API to query the encoding of a
+  connection.
 
 TODO: does this work correctly with non-ASCII file names?
 
@@ -498,18 +501,18 @@ of a string. This is mostly guessing of course.
 Not all bytes and bytes sequences are valid in UTF-8. There are a few
 alternatives to check if a string is valid:
 
--   `stringi::stri_enc_isutf8()`
+- `stringi::stri_enc_isutf8()`
 
--   `utf8::utf8_valid()`
+- `utf8::utf8_valid()`
 
--   The following trick using only base R:
+- The following trick using only base R:
 
-    ``` r
-    ! is.na(iconv(x, "UTF-8", "UTF-8"))
-    ```
+  ``` r
+  ! is.na(iconv(x, "UTF-8", "UTF-8"))
+  ```
 
-    `iconv()` returns `NA` for the elements that are invalid in the
-    input encoding.
+  `iconv()` returns `NA` for the elements that are invalid in the input
+  encoding.
 
 ## How to download web pages in the right encoding?
 
@@ -522,12 +525,12 @@ save an RDS file that contains text in some encoding, it is safe to read
 that file on a different computer (or the same computer with different
 settings), if at least one these conditions hold:
 
--   all text is either UTF-8 and latin1 encoded, and they are also
-    marked as such, or
--   both computers (or settings) have the same native encoding,
--   the RDS file has version 3, and the loading platform can represent
-    all characters in the RDS file. This usually holds if the loading
-    platform is UTF-8.
+- all text is either UTF-8 and latin1 encoded, and they are also marked
+  as such, or
+- both computers (or settings) have the same native encoding,
+- the RDS file has version 3, and the loading platform can represent all
+  characters in the RDS file. This usually holds if the loading platform
+  is UTF-8.
 
 Note that from RDS version 3 the strings in the native encoding are
 re-encoded to the current native encoding when the RDS file is loaded.
@@ -547,12 +550,12 @@ safe_parse <- function(text) {
 }
 ```
 
--   By marking the text as `unknown` we make sure that
-    `textConnection()` will not convert it.
--   The `encoding` argument of `parse()` marks the output as `UTF-8`.
--   Note that when `parse()` parses from a connection it will lose the
-    source references. You can use the `srcfile` argument of `parse()`
-    to add them back.
+- By marking the text as `unknown` we make sure that `textConnection()`
+  will not convert it.
+- The `encoding` argument of `parse()` marks the output as `UTF-8`.
+- Note that when `parse()` parses from a connection it will lose the
+  source references. You can use the `srcfile` argument of `parse()` to
+  add them back.
 
 ## How to `deparse()` UTF-8 code into UTF-8 text?
 
@@ -575,11 +578,11 @@ You can use functions or a package that already handles UTF-8 file
 names, e.g. brio or processx. If you need to open a file from C code,
 you need to do the following:
 
--   Convert the file name to UTF-8 just before passing it to C. In
-    generic code `enc2utf8()` will do.
--   In the C code, on Windows, convert the UTF-8 path to UTF-16 using
-    the `MultiByteToWideChar()` Windows API function.
--   Use the `_wfopen()` Windows API function to open the file.
+- Convert the file name to UTF-8 just before passing it to C. In generic
+  code `enc2utf8()` will do.
+- In the C code, on Windows, convert the UTF-8 path to UTF-16 using the
+  `MultiByteToWideChar()` Windows API function.
+- Use the `_wfopen()` Windows API function to open the file.
 
 Here is an example from the brio package:
 <https://github.com/r-lib/brio/blob/2cf72bb77ad55c758b4a140112916ddc23f00b59/src/brio.c#L9>
@@ -610,10 +613,10 @@ non-ASCII output, so it should be fine.
 
 If you need to test non-ASCII output produced by the cli package, then
 
--   use snapshot tests,
--   call `testthat::local_reproducible_output(unicode = TRUE)` at the
-    beginning of your test,
--   record your snapshots on a UTF-8 platform.
+- use snapshot tests,
+- call `testthat::local_reproducible_output(unicode = TRUE)` at the
+  beginning of your test,
+- record your snapshots on a UTF-8 platform.
 
 Your tests will not run on non-UTF-8 platforms. It is not currently
 possible to record non-ASCII snapshot tests on non-UTF-8 platforms.
@@ -634,68 +637,68 @@ TODO
 
 # Encoding related R functions and packages
 
--   `base::charToRaw()`
+- `base::charToRaw()`
 
--   `base::Encoding()` and `` base::`Encoding<-` ``
+- `base::Encoding()` and `` base::`Encoding<-` ``
 
--   `base::iconv()`
+- `base::iconv()`
 
--   `base::iconvlist()`
+- `base::iconvlist()`
 
--   `base::nchar()`
+- `base::nchar()`
 
--   `base::l10n_info()`
+- `base::l10n_info()`
 
--   [stringi package](https://cran.rstudio.com/web/packages/stringi/)
+- [stringi package](https://cran.rstudio.com/web/packages/stringi/)
 
--   [utf8 package](https://cran.rstudio.com/web/packages/utf8)
+- [utf8 package](https://cran.rstudio.com/web/packages/utf8)
 
--   [brio package](https://cran.rstudio.com/web/packages/brio)
+- [brio package](https://cran.rstudio.com/web/packages/brio)
 
--   [cli package](https://cran.rstudio.com/web/packages/cli/)
+- [cli package](https://cran.rstudio.com/web/packages/cli/)
 
--   [Unicode package](https://cran.rstudio.com/web/packages/Unicode)
+- [Unicode package](https://cran.rstudio.com/web/packages/Unicode)
 
 # Known encoding issues in packages and functions
 
--   `yaml::write_yaml` crashes on Windows on latin1 encoded strings:
-    <https://github.com/viking/r-yaml/issues/90>
+- `yaml::write_yaml` crashes on Windows on latin1 encoded strings:
+  <https://github.com/viking/r-yaml/issues/90>
 
 # Tips for debugging encoding issues
 
--   `charToRaw()` is your best friend.
+- `charToRaw()` is your best friend.
 
--   Don’t forget, if they print the same, if they are `identical()`,
-    they can still be in a different encoding. `charToRaw()` is your
-    best friend.
+- Don’t forget, if they print the same, if they are `identical()`, they
+  can still be in a different encoding. `charToRaw()` is your best
+  friend.
 
--   `testthat::CheckReporter` saves a `testthat-problems.rds` file, if
-    there were any test failures. You can get this file from
-    win-builder, R-hub, etc. The file is a version 2 RDS file, so no
-    encoding conversion will be done by `readRDS()`.
+- `testthat::CheckReporter` saves a `testthat-problems.rds` file, if
+  there were any test failures. You can get this file from win-builder,
+  R-hub, etc. The file is a version 2 RDS file, so no encoding
+  conversion will be done by `readRDS()`.
 
--   Don’t trust any function that processes text. Some functions keep
-    the encoding of the input, some convert to the native encoding, some
-    convert to UTF-8. Some convert to UTF-8, without marking the output
-    as UTF-8. Different R versions do different re-encodings.
+- Don’t trust any function that processes text. Some functions keep the
+  encoding of the input, some convert to the native encoding, some
+  convert to UTF-8. Some convert to UTF-8, without marking the output as
+  UTF-8. Different R versions do different re-encodings.
 
--   Typing in a string on the console is not the same as `parse()`-ing
-    the same code from a file. The console is always assumed to provide
-    text in the native encoding, package files are typically assumed
-    UTF-8. (This is why it is important to use `\uxxxx` escape sequences
-    for UTF-8 text.)
+- Typing in a string on the console is not the same as `parse()`-ing the
+  same code from a file. The console is always assumed to provide text
+  in the native encoding, package files are typically assumed UTF-8.
+  (This is why it is important to use `\uxxxx` escape sequences for
+  UTF-8 text.)
 
 # Text transformers
 
--   `print()`
+- `print()`
 
--   `format()`
+- `format()`
 
--   `normalizePath()`
+- `normalizePath()`
 
--   `basename()`
+- `basename()`
 
--   `encodeString()`
+- `encodeString()`
 
 # Changes in R 4.1.0
 
@@ -709,44 +712,44 @@ TODO
 
 Good general introductions to text encodings:
 
--   [The Absolute Minimum Every Software Developer Absolutely,
-    Positively Must Know About Unicode and Character Sets (No
-    Excuses!)](https://www.joelonsoftware.com/2003/10/08/the-absolute-minimum-every-software-developer-absolutely-positively-must-know-about-unicode-and-character-sets-no-excuses/)
+- [The Absolute Minimum Every Software Developer Absolutely, Positively
+  Must Know About Unicode and Character Sets (No
+  Excuses!)](https://www.joelonsoftware.com/2003/10/08/the-absolute-minimum-every-software-developer-absolutely-positively-must-know-about-unicode-and-character-sets-no-excuses/)
 
--   [What Every Programmer Absolutely, Positively Needs To Know About
-    Encodings And Character Sets To Work With
-    Text](https://kunststube.net/encoding/)
+- [What Every Programmer Absolutely, Positively Needs To Know About
+  Encodings And Character Sets To Work With
+  Text](https://kunststube.net/encoding/)
 
--   [UTF-8 Everywhere](http://utf8everywhere.org)
+- [UTF-8 Everywhere](http://utf8everywhere.org)
 
 R documentation:
 
--   [Encodings for
-    CHARSXPs](https://cran.r-project.org/doc/manuals/r-devel/R-ints.html#Encodings-for-CHARSXPs)
-    section in [R
-    internals](https://cran.r-project.org/doc/manuals/r-devel/R-ints.html)
+- [Encodings for
+  CHARSXPs](https://cran.r-project.org/doc/manuals/r-devel/R-ints.html#Encodings-for-CHARSXPs)
+  section in [R
+  internals](https://cran.r-project.org/doc/manuals/r-devel/R-ints.html)
 
--   [Writing portable packages / Encoding
-    issues](https://cran.r-project.org/doc/manuals/R-exts.html#Encoding-issues)
-    in [Writing R
-    Extensions](https://cran.r-project.org/doc/manuals/R-exts.html)
+- [Writing portable packages / Encoding
+  issues](https://cran.r-project.org/doc/manuals/R-exts.html#Encoding-issues)
+  in [Writing R
+  Extensions](https://cran.r-project.org/doc/manuals/R-exts.html)
 
--   [Encodings and
-    R](https://developer.r-project.org/Encodings_and_R.html) – *Old and
-    slightly outdated, it gives a good summary of what it took to change
-    R’s internal encoding.*
+- [Encodings and
+  R](https://developer.r-project.org/Encodings_and_R.html) – *Old and
+  slightly outdated, it gives a good summary of what it took to change
+  R’s internal encoding.*
 
 Intros to various encodings:
 
--   [UTF-8 on Wikipedia](https://en.wikipedia.org/wiki/UTF-8)
+- [UTF-8 on Wikipedia](https://en.wikipedia.org/wiki/UTF-8)
 
--   [UTF-16 on Wikipedia](https://en.wikipedia.org/wiki/UTF-16)
+- [UTF-16 on Wikipedia](https://en.wikipedia.org/wiki/UTF-16)
 
--   [latin-1 (ISO/IEC 8859-1) on
-    Wikipedia](https://en.wikipedia.org/wiki/ISO/IEC_8859-1)
+- [latin-1 (ISO/IEC 8859-1) on
+  Wikipedia](https://en.wikipedia.org/wiki/ISO/IEC_8859-1)
 
 About Unicode:
 
--   [The main Unicode homepage](https://home.unicode.org/)
+- [The main Unicode homepage](https://home.unicode.org/)
 
--   [Unicode FAQs](https://unicode.org/faq/)
+- [Unicode FAQs](https://unicode.org/faq/)
