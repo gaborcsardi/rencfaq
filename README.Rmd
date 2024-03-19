@@ -84,7 +84,9 @@ Up to version 4.0.3 R followed Unicode 8 (released in 2015) in terms of characte
 
 R 4.0.4 follows Unicode 12.1.
 
-R 4.1.0 (R devel at that time of writing) follows Unicode 13.0.
+R 4.1.0 - R 4.3.3 follow Unicode 13.0.
+
+Current R-devel (will be R 4.4.0 in about a month) still uses Unicode 13.0.
 
 To correctly calculate the display width of Unicode text, across various R versions, you can use the utf8 package, or `cli::ansi_nchar()`.
 
