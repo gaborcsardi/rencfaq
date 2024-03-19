@@ -167,7 +167,7 @@ of many Asian characters.
 
 R 4.0.4 follows Unicode 12.1.
 
-R 4.1.0 (R devel at that time of writing) follows Unicode 13.0.
+R 4.1.0 follows Unicode 13.0.
 
 To correctly calculate the display width of Unicode text, across various
 R versions, you can use the utf8 package, or `cli::ansi_nchar()`.
