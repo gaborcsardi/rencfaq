@@ -226,7 +226,7 @@ It is surprisingly tricky to query the current native encoding, especially on ol
     [1] "ISO-8859-15"
     ```
 
-4.  On older R versions this field is not included. On R 3.5 and above you can you are following trick to find the encoding:
+4.  On older R versions this field is not included. On R 3.5 and above you can use the following trick to find the encoding:
 
     ``` r
     ❯ rawToChar(serialize(NULL, NULL, ascii = TRUE, version = 3))

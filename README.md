@@ -350,7 +350,7 @@ especially on older R versions. Here are a number of things to try:
     ```
 
 4.  On older R versions this field is not included. On R 3.5 and above
-    you can you are following trick to find the encoding:
+    you can use the following trick to find the encoding:
 
     ``` r
     ❯ rawToChar(serialize(NULL, NULL, ascii = TRUE, version = 3))
