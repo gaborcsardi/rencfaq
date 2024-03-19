@@ -209,6 +209,7 @@ string:
 
 - Copy and paste into the [Unicode character
   inspector](https://apps.timwhitlock.info/unicode/inspect).
+* `sprintf("\\u%04X", utf8ToInt(x))`
 - *Do we have other suggestions?*
 
 If you need to include non-UTF-8 non-ASCII characters, e.g. for testing,
